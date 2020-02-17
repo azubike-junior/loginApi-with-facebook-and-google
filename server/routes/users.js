@@ -7,21 +7,28 @@ import {
     validateLogin
 } from '../helpers/validate'
 import passport from 'passport'
-const passportLogin = passport.authenticate('local', {
-    session: false
-})
-
 const router = express.Router()
 
 router.post('/signup', validateSignup, userController.signupUser);
 
-router.post('/Login', validateLogin, passportLogin, userController.signinUser);
+router.post('/Login', validateLogin, userController.signinUser);
 
 router.get('/google', passport.authenticate('google', {
-    scope: ['profile, email']
+    scope: ['email']
 }));
 
-router.get('/google/callback', passport.authenticate('google', {
+router.get('/auth/google/callback', passport.authenticate('google', {
     session: false
 }), userController.Auth);
+
+router.get('/facebook', passport.authenticate('facebook', {
+    scope: ['email']
+}));
+
+router.get('/auth/facebook/callback', passport.authenticate('facebook', {
+    session: false
+}), userController.Auth);
+
+
+
 export default router;

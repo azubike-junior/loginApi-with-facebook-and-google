@@ -5,21 +5,42 @@ const getAccessFromGoogle = (access, token, profile, done) => {
     process.nextTick(async () => {
         try {
             const foundUser = await User.findUser(profile.email);
-            if (!foundUser) {
-                const displayName = profile.displayName.split(" ")
-                const newUser = await new User({
-                    email: profile.email,
-                    firstName: displayName[0],
-                    lastName: displayName[1]
-                })
-                await User.save(newUser)
-                return done(null, generateToken(newUser))
+            console.log('foudder', foundUser)
+            if (foundUser) {
+                return done(null, foundUser)
             }
-            return done(null, generateToken(newUser))
+            const newUser = await new User({
+                id: profile.id,
+                email: profile.emails[0].value
+            })
+            await User.save(newUser)
+            return done(null, newUser)
         } catch (e) {
             done(e, null)
         }
     })
 }
 
-export default getAccessFromGoogle
+const getAccessFromFacebook = (access, token, profile, done) => {
+    process.nextTick(async () => {
+        try {
+            const foundUser = await User.findUser(profile.email)
+            if (foundUser) {
+                return done(null, foundUser)
+            }
+            const newUser = new User({
+                id: profile.id,
+                email: profile.emails[0].value
+            })
+            await User.save(newUser)
+            return done(null, newUser)
+        } catch (e) {
+            done(e, null)
+        }
+    })
+}
+
+export {
+    getAccessFromGoogle,
+    getAccessFromFacebook
+}

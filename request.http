@@ -1,7 +1,9 @@
-GET http://localhost:3000/api/v1/google
+POST http://localhost:3000/api/v1/login
 Content-Type: application/json
-Authorization: 
 
 {
-    "access_token": "ya29.Il-9B1bMgEyAkwc5LUJ308GhVdm6xzIy_nIihg_uxQlOolhBf3OmS6Gk1IZVwWBOd3ZdBNvbAlHfgg2YeT68BftxkG0wh9elYvaoQPJDo9zZQrdWu53C-sbUTYqO7MZXHQ"
+   "first_name":"azubike",
+   "last_name":"junior",
+   "email": "azubike.junior@yahoo.com",
+   "password": "gggguuu"
 }
