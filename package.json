@@ -9,7 +9,6 @@
     "build": "rm -rf dist && babel ./server -d dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "npm run build"
-
   },
   "author": "sean orj",
   "license": "MIT",
