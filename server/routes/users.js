@@ -9,6 +9,9 @@ import {
 import passport from 'passport'
 const router = express.Router()
 
+router.get('/send', (req, res) => {
+    res.json('this is working')
+})
 router.post('/signup', validateSignup, userController.signupUser);
 
 router.post('/Login', validateLogin, userController.signinUser);

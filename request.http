@@ -1,4 +1,4 @@
-POST https://login-api-v1.herokuapp.com/login
+POST https://localhost:3000/api/v1/login
 Content-Type: application/json
 
 {
