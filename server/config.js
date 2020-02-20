@@ -9,7 +9,7 @@ const {
 const passportGoogleConfig = {
     clientSecret: GOOGLE_CLIENT_SECRET,
     clientID: GOOGLE_CLIENT_ID,
-    callbackURL: `http://localhost:${PORT}/api/v1/auth/google/callback`
+    callbackURL: `https://login-api-v1.herokuapp.com/api/v1/auth/google/callback`
 }
 
 const passportFacebookConfig = {
