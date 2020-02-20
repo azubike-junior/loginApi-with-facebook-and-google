@@ -1,14 +1,14 @@
 const {
-    CLIENT_ID,
-    CLIENT_SECRET,
+    GOOGLE_CLIENT_ID,
+    GOOGLE_CLIENT_SECRET,
     PORT,
     FB_CLIENT_ID,
     FB_CLIENT_SECRET
 } = process.env
 
 const passportGoogleConfig = {
-    clientSecret: CLIENT_SECRET,
-    clientID: CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    clientID: GOOGLE_CLIENT_ID,
     callbackURL: `http://localhost:${PORT}/api/v1/auth/google/callback`
 }
 
