@@ -1,5 +1,4 @@
 import User from '../database/models';
-import generateToken from '../helpers/jwt';
 
 const getAccessFromGoogle = (access, token, profile, done) => {
     process.nextTick(async () => {
@@ -28,13 +27,14 @@ const getAccessFromFacebook = (access, token, profile, done) => {
             if (foundUser) {
                 return done(null, foundUser)
             }
-            const newUser = new User({
+            const newUser = await new User({
                 id: profile.id,
                 email: profile.emails[0].value
             })
             await User.save(newUser)
             return done(null, newUser)
         } catch (e) {
+            console.log(e)
             done(e, null)
         }
     })
