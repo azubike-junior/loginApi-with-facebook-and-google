@@ -36,7 +36,7 @@ exports.getAccessFromGoogle = getAccessFromGoogle;
 const getAccessFromFacebook = (access, token, profile, done) => {
   process.nextTick(async () => {
     try {
-      const foundUser = await _models.default.findUser(profile.email);
+      const foundUser = await _models.default.findUser(profile.emails[0].value);
 
       if (foundUser) {
         return done(null, foundUser);
