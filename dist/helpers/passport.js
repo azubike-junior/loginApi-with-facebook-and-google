@@ -9,8 +9,6 @@ exports.getAccessFromFacebook = exports.getAccessFromGoogle = void 0;
 
 var _models = _interopRequireDefault(require("../database/models"));
 
-var _jwt = _interopRequireDefault(require("../helpers/jwt"));
-
 const getAccessFromGoogle = (access, token, profile, done) => {
   process.nextTick(async () => {
     try {
@@ -44,13 +42,14 @@ const getAccessFromFacebook = (access, token, profile, done) => {
         return done(null, foundUser);
       }
 
-      const newUser = new _models.default({
+      const newUser = await new _models.default({
         id: profile.id,
         email: profile.emails[0].value
       });
       await _models.default.save(newUser);
       return done(null, newUser);
     } catch (e) {
+      console.log(e);
       done(e, null);
     }
   });
