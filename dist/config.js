@@ -20,6 +20,6 @@ exports.passportGoogleConfig = passportGoogleConfig;
 const passportFacebookConfig = {
   clientID: FB_CLIENT_ID,
   clientSecret: FB_CLIENT_SECRET,
-  callbackURL: `https://login-api-v1.herokuapp.com/api/v1/auth/facebook/callback`
+  callbackURL: `https://localhost:3000/api/v1/auth/facebook/callback`
 };
 exports.passportFacebookConfig = passportFacebookConfig;
