@@ -23,18 +23,17 @@ const getAccessFromGoogle = (access, token, profile, done) => {
 const getAccessFromFacebook = (access, token, profile, done) => {
     process.nextTick(async () => {
         try {
-            const foundUser = await User.findUser(profile.emails[0].value)
-            if (foundUser) {
-                return done(null, foundUser)
+            const foundUser = await User.findUserById(profile.id)
+            if (!foundUser) {
+                const newUser = await new User({
+                    id: profile.id,
+                    email: profile.emails[0].value
+                })
+                await User.save(newUser)
+                return done(null, newUser)
             }
-            const newUser = await new User({
-                id: profile.id,
-                email: profile.emails[0].value
-            })
-            await User.save(newUser)
-            return done(null, newUser)
+            return done(null, foundUser)
         } catch (e) {
-            console.log(e)
             done(e, null)
         }
     })

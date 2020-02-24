@@ -38,6 +38,17 @@ class Users {
     }
   }
 
+  static async findUserById(id) {
+    const sql = 'SELECT * FROM users WHERE user_id = $1';
+    const params = [user_id];
+
+    try {
+      return await (0, _migrate.default)(sql, params);
+    } catch (e) {
+      throw e;
+    }
+  }
+
 }
 
 var _default = Users;

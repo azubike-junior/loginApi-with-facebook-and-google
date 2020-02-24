@@ -32,6 +32,4 @@ router.get('/auth/facebook/callback', passport.authenticate('facebook', {
     session: false
 }), userController.Auth);
 
-
-
 export default router;

@@ -36,20 +36,19 @@ exports.getAccessFromGoogle = getAccessFromGoogle;
 const getAccessFromFacebook = (access, token, profile, done) => {
   process.nextTick(async () => {
     try {
-      const foundUser = await _models.default.findUser(profile.emails[0].value);
+      const foundUser = await _models.default.findUserById(profile.id);
 
-      if (foundUser) {
-        return done(null, foundUser);
+      if (!foundUser) {
+        const newUser = await new _models.default({
+          id: profile.id,
+          email: profile.emails[0].value
+        });
+        await _models.default.save(newUser);
+        return done(null, newUser);
       }
 
-      const newUser = await new _models.default({
-        id: profile.id,
-        email: profile.emails[0].value
-      });
-      await _models.default.save(newUser);
-      return done(null, newUser);
+      return done(null, foundUser);
     } catch (e) {
-      console.log(e);
       done(e, null);
     }
   });
