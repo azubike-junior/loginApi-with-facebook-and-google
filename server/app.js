@@ -8,7 +8,7 @@ import {
 } from './controllers/passport';
 
 dotenv.config();
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4000
 const app = express();
 
 app.use(express.json());
