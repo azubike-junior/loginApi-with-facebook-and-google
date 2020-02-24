@@ -27,7 +27,7 @@ class Users {
         }
     }
 
-    static async findUserById(id) {
+    static async findUserById(user_id) {
         const sql = 'SELECT * FROM users WHERE user_id = $1';
         const params = [user_id];
         try {
